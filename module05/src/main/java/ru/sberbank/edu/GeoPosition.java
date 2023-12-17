@@ -24,7 +24,34 @@ public class GeoPosition {
      */
     public GeoPosition(String latitudeGradus, String longitudeGradus) {
         // parse and set latitude and longitude in radian
+        this.latitude = Math.toRadians(gradusCalculate(latitudeGradus));
+        this.longitude = Math.toRadians(gradusCalculate(longitudeGradus));
     }
 
+    private Double gradusCalculate(String gradus) {
+        String[] parseGradus = gradus.split("\\D+");
+        if (parseGradus.length == 1) {
+            return Double.parseDouble(parseGradus[0]);
+        } else if (parseGradus.length == 3) {
+            return Double.parseDouble(parseGradus[0]) + Double.parseDouble(parseGradus[1])/60.0 + Double.parseDouble(parseGradus[2])/3600.0;
+        } else {
+            throw new IllegalArgumentException( );
+        }
+    }
     // getters and toString
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "GeoPosition{" +
+                "latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
+    }
 }
