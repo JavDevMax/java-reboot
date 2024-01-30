@@ -1,6 +1,5 @@
 package ru.sberbank.edu;
 
-
 import org.h2.tools.Server;
 import ru.sberbank.edu.dbconnection.H2DbEmbedded;
 import ru.sberbank.edu.repository.CarDbRepositoryImpl;
@@ -16,7 +15,7 @@ public class CarBootstrap {
         Server server = Server.createTcpServer(args).start();
         H2DbEmbedded.initDb();
 
-        try(H2DbEmbedded h2DbEmbedded = new H2DbEmbedded()) {
+        try (H2DbEmbedded h2DbEmbedded = new H2DbEmbedded()) {
             CarRepository carRepository = new CarDbRepositoryImpl(H2DbEmbedded.getConnection());
             CarService carService = new CarServiceImpl(carRepository);
 
